@@ -1,11 +1,19 @@
 import { useState } from "react";
 import { useIssues } from "../issues/issueQueries";
 import { useUsers } from "../users/userQueries";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store/store";
 
 export default function IssueList() {
   const [page, setPage] = useState(1);
 
-  const { data, isLoading, isError } = useIssues(page);
+  const status = useSelector((state: RootState) => state.filters.status);
+
+  const { data, isLoading, isError } = useIssues(
+    page,
+    status === "all" ? undefined : status,
+  );
+
   const { data: users } = useUsers();
 
   if (isLoading) return <p>Loading issues...</p>;

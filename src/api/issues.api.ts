@@ -37,3 +37,19 @@ export const getIssues = async (page: number, status?: string) => {
     total: filtered.length,
   };
 };
+
+export const createIssues = async (title: string) => {
+  await delay(500);
+
+  const newIssue: Issue = {
+    id: Date.now().toString(),
+    title,
+    status: "open",
+    assigneeId: null,
+    createdAt: new Date().toISOString(),
+  };
+
+  issues.unshift(newIssue);
+
+  return newIssue;
+};
