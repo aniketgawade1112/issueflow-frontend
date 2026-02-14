@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useCreateIssues } from "../issueQueries";
+import { useCreateIssue } from "../issueQueries";
 
 export default function IssueForm() {
   const [title, setTitle] = useState("");
-  const { mutate, isPending } = useCreateIssues();
+  const { mutate, isPending } = useCreateIssue();
 
   const handleSubmit = () => {
     if (!title.trim()) return;
